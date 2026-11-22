@@ -45,46 +45,27 @@ export function AdSlot({
       ? "min-h-[120px]"
       : "min-h-[90px]";
 
-  if (clientId) {
-    return (
-      <div
-        className={`w-full my-6 flex flex-col items-center justify-center print:hidden ${className}`}
-        aria-label="Advertisement"
-      >
-        <span className="text-[10px] uppercase tracking-wider text-slate-400 mb-1">
-          {label}
-        </span>
-        <div className={`w-full flex justify-center overflow-hidden ${heightClass}`}>
-          <ins
-            className="adsbygoogle"
-            style={{ display: "block", width: "100%" }}
-            data-ad-client={clientId}
-            data-ad-slot={slotId}
-            data-ad-format={format === "in-article" ? "fluid" : "auto"}
-            data-full-width-responsive="true"
-          />
-        </div>
-      </div>
-    );
+  if (!clientId) {
+    return null;
   }
 
   return (
     <div
-      className={`w-full my-6 print:hidden ${className}`}
-      aria-label="Advertisement placeholder"
+      className={`w-full my-6 flex flex-col items-center justify-center print:hidden ${className}`}
+      aria-label="Advertisement"
     >
-      <div
-        className={`w-full ${heightClass} rounded-xl border border-dashed border-slate-300 bg-slate-50/80 flex flex-col items-center justify-center px-4 py-3 text-center`}
-      >
-        <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">
-          {label}
-        </span>
-        <p className="text-xs text-slate-500 mt-1">
-          AdSense-Ready Slot ({format === "rectangle" ? "300×250 / Responsive" : "728×90 / Responsive"})
-        </p>
-        <p className="text-[11px] text-slate-400 mt-0.5">
-          Set <code className="bg-slate-200/70 px-1 rounded">NEXT_PUBLIC_ADSENSE_CLIENT_ID</code> in <code className="bg-slate-200/70 px-1 rounded">.env.local</code> to serve live ads
-        </p>
+      <span className="text-[10px] uppercase tracking-wider text-slate-400 mb-1">
+        {label}
+      </span>
+      <div className={`w-full flex justify-center overflow-hidden ${heightClass}`}>
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block", width: "100%" }}
+          data-ad-client={clientId}
+          data-ad-slot={slotId}
+          data-ad-format={format === "in-article" ? "fluid" : "auto"}
+          data-full-width-responsive="true"
+        />
       </div>
     </div>
   );
